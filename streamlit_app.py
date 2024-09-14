@@ -1,5 +1,6 @@
 import streamlit as st
 import pandas as pd
+import mysql.connector
 import confg  # Importing the backend functions from confg.py
 from dotenv import load_dotenv
 import os
