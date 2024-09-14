@@ -2,9 +2,7 @@ import mysql.connector
 from mysql.connector import Error
 from dotenv import load_dotenv
 import os
-
 load_dotenv()
-
 # Function to create a connection to the MySQL database
 DB_HOST = os.getenv('DB_HOST')
 DB_USER = os.getenv('DB_USER')
