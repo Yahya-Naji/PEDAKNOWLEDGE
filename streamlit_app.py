@@ -2,15 +2,16 @@ import streamlit as st
 import pandas as pd
 import mysql.connector
 import confg  # Importing the backend functions from confg.py
-from dotenv import load_dotenv
-import os
 
-# Load environment variables from .env file
-load_dotenv()
+# Retrieve the stored username and password from Streamlit Secrets
+USERNAME = st.secrets["APP_USERNAME"]
+PASSWORD = st.secrets["APP_PASSWORD"]
 
-# Retrieve the stored username and password from .env
-USERNAME = os.getenv("APP_USERNAME")
-PASSWORD = os.getenv("APP_PASSWORD")
+# You can also access the database credentials like this:
+DB_HOST = st.secrets["DB_HOST"]
+DB_USER = st.secrets["DB_USER"]
+DB_PASSWORD = st.secrets["DB_PASSWORD"]
+DB_NAME = st.secrets["DB_NAME"]
 
 # Function to validate the inputs
 def validate_inputs(chapter_name, grade, learning_objective, sample_questions):
