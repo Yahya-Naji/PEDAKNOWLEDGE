@@ -14,8 +14,7 @@ APP_PASSWORD="test"
 
 
 # Debug: Check if environment variables are loaded properly
-st.write(f"Debug: USERNAME from .env: {USERNAME}")
-st.write(f"Debug: PASSWORD from .env: {PASSWORD}")
+
 
 # Function to validate the inputs
 def validate_inputs(chapter_name, grade, learning_objective, sample_questions):
@@ -39,13 +38,7 @@ def login():
     username = st.text_input("Username").strip()  # Stripping extra spaces
     password = st.text_input("Password", type="password").strip()  # Stripping extra spaces
     
-    if st.button("Login"):
-        # Debug: Show the input and expected values for username and password
-        st.write(f"Debug: Entered Username: {username}")
-        st.write(f"Debug: Entered Password: {password}")
-        st.write(f"Debug: Expected Username: {USERNAME}")
-        st.write(f"Debug: Expected Password: {PASSWORD}")
-        
+    if st.button("Login"):   
         if username == USERNAME and password == PASSWORD:
             st.success("Login successful!")
             st.session_state["logged_in"] = True
@@ -81,11 +74,7 @@ else:
         if st.button("Submit"):
             # Validate input before sending to the database
             if validate_inputs(chapter_name, grade, learning_objective, sample_questions):
-                result = confg.add_content(chapter_name, grade, learning_objective, sample_questions)
-                
-                # Debug: Show the result of the database insertion
-                st.write(f"Debug: Result from add_content: {result}")
-                
+                result = confg.add_content(chapter_name, grade, learning_objective, sample_questions)      
                 if "error" in result:
                     st.error(result["error"])
                 else:
