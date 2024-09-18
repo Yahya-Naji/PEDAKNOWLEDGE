@@ -8,13 +8,13 @@ import os
 # Load environment variables from .env file
 load_dotenv()
 
-# Retrieve the stored username and password from .env
-APP_USERNAME="test"
-APP_PASSWORD="test"
-
+# Retrieve the stored username and password from .env or use default values
+USERNAME = os.getenv("APP_USERNAME", "test")  # Defaulting to "test" if not found in .env
+PASSWORD = os.getenv("APP_PASSWORD", "test")
 
 # Debug: Check if environment variables are loaded properly
-
+st.write(f"Debug: USERNAME from .env: {USERNAME}")
+st.write(f"Debug: PASSWORD from .env: {PASSWORD}")
 
 # Function to validate the inputs
 def validate_inputs(chapter_name, grade, learning_objective, sample_questions):
