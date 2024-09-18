@@ -1,20 +1,21 @@
 import mysql.connector
 from mysql.connector import Error
-from dotenv import load_dotenv
-import os
-load_dotenv()
+import streamlit as st
+
+# Retrieve database credentials from Streamlit Secrets
+DB_HOST = st.secrets["DB_HOST"]
+DB_USER = st.secrets["DB_USER"]
+DB_PASSWORD = st.secrets["DB_PASSWORD"]
+DB_NAME = st.secrets["DB_NAME"]
+
 # Function to create a connection to the MySQL database
-DB_HOST = os.getenv('DB_HOST')
-DB_USER = os.getenv('DB_USER')
-DB_PASSWORD = os.getenv('DB_PASSWORD')
-DB_NAME = os.getenv('DB_NAME')
 def create_connection():
     try:
         connection = mysql.connector.connect(
             host=DB_HOST,
-            user=DB_USER,  # replace with your MySQL username
-            password=DB_PASSWORD,  # replace with your MySQL password
-            database=DB_NAME  # replace with your MySQL database
+            user=DB_USER,
+            password=DB_PASSWORD,
+            database=DB_NAME
         )
         return connection
     except Error as e:
