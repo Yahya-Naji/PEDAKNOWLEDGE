@@ -9,8 +9,9 @@ import os
 load_dotenv()
 
 # Retrieve the stored username and password from .env
-USERNAME = os.getenv("APP_USERNAME")
-PASSWORD = os.getenv("APP_PASSWORD")
+APP_USERNAME="test"
+APP_PASSWORD="test"
+
 
 # Debug: Check if environment variables are loaded properly
 st.write(f"Debug: USERNAME from .env: {USERNAME}")
