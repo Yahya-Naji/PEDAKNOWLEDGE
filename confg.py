@@ -12,15 +12,18 @@ DB_NAME = st.secrets["DB_NAME"]
 def create_connection():
     try:
         connection = mysql.connector.connect(
-            host=DB_HOST,
-            user=DB_USER,
-            password=DB_PASSWORD,
-            database=DB_NAME
+            host='localhost',
+            user='root',
+            password='@yd@1996',
+            database='PedaKnowledge'
         )
+        if connection.is_connected():
+            print("Successfully connected to the database")
         return connection
     except Error as e:
-        print(f"Error connecting to MySQL: {e}")
+        st.error(f"Error connecting to MySQL: {e}")  # This will show the error in the app
         return None
+
 
 # Function to add content to the database
 def add_content(chapter_name, grade, learning_objective, sample_questions):
