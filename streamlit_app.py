@@ -12,6 +12,10 @@ load_dotenv()
 USERNAME = os.getenv("APP_USERNAME")
 PASSWORD = os.getenv("APP_PASSWORD")
 
+# Debug: Check if environment variables are loaded properly
+st.write(f"Debug: USERNAME from .env: {USERNAME}")
+st.write(f"Debug: PASSWORD from .env: {PASSWORD}")
+
 # Function to validate the inputs
 def validate_inputs(chapter_name, grade, learning_objective, sample_questions):
     if not chapter_name:
@@ -31,13 +35,20 @@ def validate_inputs(chapter_name, grade, learning_objective, sample_questions):
 # Function for login verification
 def login():
     st.title("Login")
-    username = st.text_input("Username")
-    password = st.text_input("Password", type="password")
+    username = st.text_input("Username").strip()  # Stripping extra spaces
+    password = st.text_input("Password", type="password").strip()  # Stripping extra spaces
     
     if st.button("Login"):
+        # Debug: Show the input and expected values for username and password
+        st.write(f"Debug: Entered Username: {username}")
+        st.write(f"Debug: Entered Password: {password}")
+        st.write(f"Debug: Expected Username: {USERNAME}")
+        st.write(f"Debug: Expected Password: {PASSWORD}")
+        
         if username == USERNAME and password == PASSWORD:
             st.success("Login successful!")
             st.session_state["logged_in"] = True
+            st.session_state["username"] = username  # Store username in session state for future use
         else:
             st.error("Invalid username or password")
 
@@ -48,6 +59,9 @@ if "logged_in" not in st.session_state:
 if not st.session_state["logged_in"]:
     login()
 else:
+    # Debug: Display logged-in username
+    st.write(f"Debug: Logged in as {st.session_state['username']}")
+
     # If logged in, show the app content
     st.title("Learning Content Management")
 
@@ -67,6 +81,10 @@ else:
             # Validate input before sending to the database
             if validate_inputs(chapter_name, grade, learning_objective, sample_questions):
                 result = confg.add_content(chapter_name, grade, learning_objective, sample_questions)
+                
+                # Debug: Show the result of the database insertion
+                st.write(f"Debug: Result from add_content: {result}")
+                
                 if "error" in result:
                     st.error(result["error"])
                 else:
@@ -77,6 +95,10 @@ else:
 
         if st.button("Retrieve Content"):
             content = confg.get_content()
+            
+            # Debug: Show the result of the content retrieval
+            st.write(f"Debug: Result from get_content: {content}")
+            
             if "error" in content:
                 st.error(content["error"])
             else:
